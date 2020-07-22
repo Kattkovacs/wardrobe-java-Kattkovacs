@@ -19,12 +19,9 @@ public class ShirtHanger implements Hanger<UpperClothes> {
 
     @Override
     public Optional<UpperClothes> takeOff(UUID id) {
-        if (itemUpper != null && itemUpper.getId().equals(id)) {
-            Optional<UpperClothes> result = Optional.ofNullable(itemUpper);
-            itemUpper = null;
-            return result;
-        }
-        return Optional.empty();
+        Optional<UpperClothes> result = Optional.ofNullable(itemUpper).filter(x-> x.getId().equals(id));
+        result.ifPresent(x -> itemUpper = null);
+        return result;
     }
 
     @Override
@@ -36,5 +33,10 @@ public class ShirtHanger implements Hanger<UpperClothes> {
     @Override
     public boolean hasSlotFor(Clothes.ClothesType type) {
         return Clothes.upperClothesTypes.contains(type) && Optional.ofNullable(itemUpper).isEmpty();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return itemUpper == null;
     }
 }

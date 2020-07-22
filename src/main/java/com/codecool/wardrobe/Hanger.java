@@ -13,4 +13,6 @@ public interface Hanger<T extends Clothes> {
     void put(T item);
 
     boolean hasSlotFor(Clothes.ClothesType type);
+
+    boolean isEmpty();
 }

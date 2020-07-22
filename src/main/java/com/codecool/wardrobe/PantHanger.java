@@ -47,4 +47,9 @@ public class PantHanger implements Hanger<Clothes> {
         if (Clothes.upperClothesTypes.contains(type)) return itemUpper == null;
         return false;
     }
+
+    @Override
+    public boolean isEmpty() {
+        return itemLower == null && itemUpper == null;
+    }
 }
